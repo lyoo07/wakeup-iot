@@ -1,0 +1,1 @@
+print("wakeup iot start")
