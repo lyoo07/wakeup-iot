@@ -16,7 +16,7 @@ try:
             filename = datetime.now().strftime("%Y%m%d_%H%M%S.jpg")
             os.system(f"fswebcam photos/{filename}")
             print(f"撮影しました: {filename}")
-            time.sleep(1)  # 連打防止
+            time.sleep(1)
         time.sleep(0.1)
 
 except KeyboardInterrupt:

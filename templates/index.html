@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>wakeup photos</title>
+</head>
+<body>
+  <h1>起きましたログ</h1>
+
+  {% for photo in photos %}
+    <div>
+      <img src="/photos/{{ photo }}" width="300">
+      <p>{{ photo }}</p>
+    </div>
+  {% endfor %}
+</body>
+</html>
