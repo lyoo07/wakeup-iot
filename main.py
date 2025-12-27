@@ -3,6 +3,8 @@ import os
 import time
 from datetime import datetime
 
+MPG123 = "/usr/bin/mpg123"
+
 # GPIO設定
 ALARM_STOP_BTN = 17
 MUSIC_BTN = 27
@@ -11,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(ALARM_STOP_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(MUSIC_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-ALARM_TIME = "14:43"
+ALARM_TIME = "14:50"
 ALARM_SOUND = "sounds/hituzi.mp3"
 MUSIC_SOUND = "sounds/music.mp3"
 
@@ -24,7 +26,7 @@ try:
 
         if now == ALARM_TIME and not alarm_playing:
             print("アラーム開始")
-            alarm_process = os.system(f"mpg-123 -q {ALARM_SOUND} &")
+            alarm_process = os.system(f"{MPG123} -q {ALARM_SOUND} &")
             alarm_playing = True
 
         if GPIO.input(ALARM_STOP_BTN) == GPIO.LOW and alarm_playing:
@@ -36,7 +38,7 @@ try:
         if GPIO.input(MUSIC_BTN) == GPIO.LOW:
             print("音楽再生")
             os.system("pkill mpg123")
-            os.system(f"mpg123 {MUSIC_SOUND} &")
+            os.system(f"{MPG123} {MUSIC_SOUND} &")
             time.sleep(1)
 
         time.sleep(0.2)
