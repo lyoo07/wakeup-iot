@@ -11,7 +11,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(ALARM_STOP_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(MUSIC_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-ALARM_TIME = "14:35"
+ALARM_TIME = "14:43"
 ALARM_SOUND = "sounds/hituzi.mp3"
 MUSIC_SOUND = "sounds/music.mp3"
 
