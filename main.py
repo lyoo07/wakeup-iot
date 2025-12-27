@@ -12,8 +12,8 @@ GPIO.setup(ALARM_STOP_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(MUSIC_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 ALARM_TIME = "07:00"
-ALARM_SOUND = "hituzi.mp3"
-MUSIC_SOUND = "music.mp3"
+ALARM_SOUND = "sounds/hituzi.mp3"
+MUSIC_SOUND = "sounds/music.mp3"
 
 alarm_playing = False
 alarm_process = None
