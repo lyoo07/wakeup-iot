@@ -13,15 +13,20 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(ALARM_STOP_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(MUSIC_BTN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-ALARM_TIME = "14:50"
+
 ALARM_SOUND = "sounds/hituzi.mp3"
 MUSIC_SOUND = "sounds/music.mp3"
 
 alarm_playing = False
 alarm_process = None
 
+def get_alarm_time():
+    with open("alarm.txt", "r") as f:
+        return f.read().strip()
+
 try:
     while True:
+        alarm_time = get_alarm_time()
         now = datetime.now().strftime("%H:%M")
 
         if now == ALARM_TIME and not alarm_playing:

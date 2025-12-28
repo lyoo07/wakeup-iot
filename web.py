@@ -11,11 +11,16 @@ def photos(filename):
 
 @app.route("/")
 def index():
-    files = sorted(
-        os.listdir(PHOTO_DIR),
-        reverse=True
-    )
-    return render_template("index.html", photos=files)
+    if request.method == "POST":
+        new_time = request.form["alarm_time"]
+        with open("alarm.txt", "w") as f:
+            f.write(new_time)
+        return redirect("/")
+    
+    with open("alarm.txt") as f:
+        alarm_time = f.read().strip()
+    
+    return render_template("index.html", alarm_time=alarm_time)
 
 if __name__ == "_main_":
     app.run(host="0.0.0.0", port=5000)
