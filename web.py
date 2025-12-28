@@ -1,26 +1,28 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, send_from_directory
 import os
-from flask import send_from_directory
 
 app = Flask(__name__)
 PHOTO_DIR = "photos"
 
 @app.route("/photos/<filename>")
 def photos(filename):
-    return send_from_directory("photos", filename)
+    return send_from_directory(PHOTO_DIR, filename)
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
         new_time = request.form["alarm_time"]
         with open("alarm.txt", "w") as f:
             f.write(new_time)
         return redirect("/")
-    
-    with open("alarm.txt") as f:
-        alarm_time = f.read().strip()
-    
+
+    if os.path.exists("alarm.txt"):
+        with open("alarm.txt") as f:
+            alarm_time = f.read().strip()
+    else:
+        alarm_time = "07:00"
+
     return render_template("index.html", alarm_time=alarm_time)
 
-if __name__ == "_main_":
-    app.run(host="0.0.0.0", port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
