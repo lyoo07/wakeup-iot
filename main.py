@@ -21,9 +21,10 @@ alarm_playing = False
 alarm_process = None
 
 def get_alarm_time():
-    with open("alarm.txt") as f:
-        return f.read().strip()
-    except FileNotFoundError
+    try:
+        with open("alarm.txt") as f:
+            return f.read().strip()
+    except FileNotFoundError:
         return None
 
 try:
