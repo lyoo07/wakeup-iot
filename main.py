@@ -21,15 +21,17 @@ alarm_playing = False
 alarm_process = None
 
 def get_alarm_time():
-    with open("alarm.txt", "r") as f:
+    with open("alarm.txt") as f:
         return f.read().strip()
+    except FileNotFoundError
+        return None
 
 try:
     while True:
         alarm_time = get_alarm_time()
         now = datetime.now().strftime("%H:%M")
 
-        if now == ALARM_TIME and not alarm_playing:
+        if alarm_time and now == alarm_time and not alarm_playing:
             print("アラーム開始")
             alarm_process = os.system(f"{MPG123} -q {ALARM_SOUND} &")
             alarm_playing = True
